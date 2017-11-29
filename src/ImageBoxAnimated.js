@@ -14,91 +14,91 @@ const ImageBox = styled.div`
 `;
 
 class ImageBoxAnimation extends React.Component {
-  componentWillMount() {
-    this.setState({
-      animationNumber: 0,
-    });
-  }
-
-  componentDidMount() {
-    if(this.props.startAnimation) {
-      this.runAnimation();
+    componentWillMount() {
+        this.setState({
+            animationNumber: 0,
+        });
     }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.props.startAnimation !== nextProps.startAnimation) {
-      if(nextProps.startAnimation) {
-        this.runAnimation();
-      } else {
-        this.reverseAnimation();
-      }
+    componentDidMount() {
+        if (this.props.startAnimation) {
+            this.runAnimation();
+        }
     }
-  }
 
-  reverseAnimation = () => {
-    for (var i = 0; i < this.props.noOfRows; i++) {
-      setTimeout(this.reverseLastAnimation, i * this.props.speed);
+    componentWillReceiveProps(nextProps) {
+        if (this.props.startAnimation !== nextProps.startAnimation) {
+            if (nextProps.startAnimation) {
+                this.runAnimation();
+            } else {
+                this.reverseAnimation();
+            }
+        }
     }
-  }
 
-  runAnimation = () => {
-    for (var i = 0; i < this.props.noOfRows; i++) {
-      setTimeout(this.startNextAnimation, i * this.props.speed);
+    reverseAnimation = () => {
+        for (var i = 0; i < this.props.noOfRows; i++) {
+            setTimeout(this.reverseLastAnimation, i * this.props.speed);
+        }
     }
-  }
 
-  reverseLastAnimation = () => {
-    this.setState({
-      animationNumber: this.state.animationNumber - 1,
-    });
-  }
+    runAnimation = () => {
+        for (var i = 0; i < this.props.noOfRows; i++) {
+            setTimeout(this.startNextAnimation, i * this.props.speed); //1 * 100
+        }
+    }
 
-  startNextAnimation = () => {
-    this.setState({
-      animationNumber: this.state.animationNumber + 1,
-    });
-  }
+    reverseLastAnimation = () => {
+        this.setState({
+            animationNumber: this.state.animationNumber - 1,
+        });
+    }
 
-  render() {
-    const {
+    startNextAnimation = () => {
+        this.setState({
+            animationNumber: this.state.animationNumber + 1,
+        });
+    }
+
+    render() {
+        const {
       image,
-      width,
-      height,
-      noOfRows,
-      ...props,
+            width,
+            height,
+            noOfRows,
+            ...props,
     } = this.props;
 
-    const {
+        const {
       animationNumber,
     } = this.state;
 
-    return (
-      <ImageBox
-        image={image}
-        width={width}
-        height={height}
-        {...props}
-      >
-        {Array(noOfRows).fill().map((_, i) => (
-          <BlackBoxAnimated
-            key={i}
-            heightPercentage={100 / noOfRows}
-            reverseDirection={i % 2 === 0}
-            startAnimation={animationNumber >= i + 1}
-          />
-        ))}
-      </ImageBox>
-    );
-  }
+        return (
+            <ImageBox
+                image={image}
+                width={width}
+                height={height}
+                {...props}
+            >
+                {Array(noOfRows).fill().map((_, i) => (
+                    <BlackBoxAnimated
+                        key={i}
+                        heightPercentage={100 / noOfRows}
+                        reverseDirection={i % 2 === 0}
+                        startAnimation={animationNumber >= i + 1}
+                    />
+                ))}
+            </ImageBox>
+        );
+    }
 }
 
 ImageBoxAnimation.propTypes = {
-  image: PropTypes.string.isRequired,
-  width: PropTypes.any.isRequired,
-  height: PropTypes.any.isRequired,
-  noOfRows: PropTypes.number.isRequired,
-  speed: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    width: PropTypes.any.isRequired,
+    height: PropTypes.any.isRequired,
+    noOfRows: PropTypes.number.isRequired,
+    speed: PropTypes.number.isRequired,
 }
 
 export default ImageBoxAnimation;

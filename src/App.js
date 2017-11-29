@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 class App extends Component {
   componentWillMount() {
     this.setState({
-      startFirstBoxAnimation: false,
+      startFirstBoxAnimation: true,
       startSecondBoxAnimation: true,
     });
   }
@@ -19,7 +19,7 @@ class App extends Component {
       startFirstBoxAnimation,
       startSecondBoxAnimation,
     } = this.state;
-
+    console.log(startFirstBoxAnimation, startSecondBoxAnimation)
     return (
       <Wrapper>
         <ImageBoxAnimated
@@ -27,7 +27,7 @@ class App extends Component {
           width={600}
           height={400}
           noOfRows={8}
-          speed={900}
+          speed={100}
           startAnimation={startFirstBoxAnimation}
           onClick={() => this.setState({ startFirstBoxAnimation: !startFirstBoxAnimation })}
         />
