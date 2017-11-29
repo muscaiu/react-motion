@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 
+import BlackBoxAnimated from './BlackBoxAnimated'
+
 const Wrapper = styled.div`
   width: 100px;
   height: 100px;
@@ -14,20 +16,23 @@ const ImageBox = styled.div`
   background-position: center;
 `
 
-const BlackBox = styled.div`
-  height: 25%;
-  width: 100%;
-  background: #000;
-  transform: scaleX(0.25);
-  transform-origin: right center;
-`
-
 class App extends Component {
   render() {
     return (
       <Wrapper>
         <ImageBox>
-          <BlackBox />
+          <BlackBoxAnimated
+            reverseDirection={false}
+          />
+          <BlackBoxAnimated
+            reverseDirection={true}
+          />
+          <BlackBoxAnimated
+            reverseDirection={false}
+          />
+          <BlackBoxAnimated
+            reverseDirection={true}
+          />
         </ImageBox>
       </Wrapper>
     );
