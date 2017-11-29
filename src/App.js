@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import BlackBoxAnimated from './BlackBoxAnimated'
+import ImageBoxAnimated from './ImageBoxAnimated';
 
 const Wrapper = styled.div`
-  width: 100px;
-  height: 100px;
-  background: #333;
-`
-const ImageBox = styled.div`
-  width: 600px;
-  height: 400px;
-  background: url('https://cdn-images-1.medium.com/max/2000/1*8v-jC0gOxqP2oOaTY32w_A.jpeg');
-  background-size: cover;
-  background-position: center;
-`
+`;
 
 class App extends Component {
+  componentWillMount() {
+    this.setState({
+      startFirstBoxAnimation: false,
+      startSecondBoxAnimation: true,
+    });
+  }
+
   render() {
+    const {
+      startFirstBoxAnimation,
+      startSecondBoxAnimation,
+    } = this.state;
+
     return (
       <Wrapper>
-        <ImageBox>
-          <BlackBoxAnimated
-            reverseDirection={false}
-          />
-          <BlackBoxAnimated
-            reverseDirection={true}
-          />
-          <BlackBoxAnimated
-            reverseDirection={false}
-          />
-          <BlackBoxAnimated
-            reverseDirection={true}
-          />
-        </ImageBox>
+        <ImageBoxAnimated
+          image={'https://www.adventure-journal.com/wp-content/uploads/2015/06/o-the-glory-of-it-all.jpg'}
+          width={600}
+          height={400}
+          noOfRows={8}
+          speed={900}
+          startAnimation={startFirstBoxAnimation}
+          onClick={() => this.setState({ startFirstBoxAnimation: !startFirstBoxAnimation })}
+        />
+        <ImageBoxAnimated
+          image={'https://www.adventure-journal.com/wp-content/uploads/2015/06/o-the-glory-of-it-all.jpg'}
+          width={`20vw`}
+          height={`15vw`}
+          noOfRows={4}
+          speed={100}
+          startAnimation={startSecondBoxAnimation}
+          onClick={() => this.setState({ startSecondBoxAnimation: !startSecondBoxAnimation })}
+        />
       </Wrapper>
     );
   }
